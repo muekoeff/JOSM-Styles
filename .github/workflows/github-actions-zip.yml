@@ -1,0 +1,27 @@
+name: ZIP
+on: [ push ]
+jobs:
+  zip-files:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/upload-artifact@v1
+        with:
+          name: advertising=
+          path: ${{ github.workspace }}/advertising=/
+      - uses: actions/upload-artifact@v1
+        with:
+          name: crossing=traffic_signals
+          path: ${{ github.workspace }}/crossing=traffic_signals/
+      - uses: actions/upload-artifact@v1
+        with:
+          name: cycleway_lane=
+          path: ${{ github.workspace }}/cycleway_lane=/
+      - uses: actions/upload-artifact@v1
+        with:
+          name: door=
+          path: ${{ github.workspace }}/door=/
+      - uses: actions/upload-artifact@v1
+        with:
+          name: man_made=street_cabinet
+          path: ${{ github.workspace }}/man_made=street_cabinet/

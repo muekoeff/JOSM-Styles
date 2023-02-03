@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<presets xmlns="http://josm.openstreetmap.de/tagging-preset-1.0" author="nw520" description="" shortdescription="" version="">
+	<item icon="door.svg" name="Door" type="node" match_expression="-entrance~'garage|home|main|service|shop'">
+		<combo key="entrance" text="Entrance" values="emergency,exit,home,main,service,shop,staircase,yes" match="key!" />
+		<combo key="door" text="Door" values="folding,hinged,loadingdock,no,overhead,revolving,sliding,trapdoor,yes" match="key!" />
+		<combo key="door:wings" text="Door:wings" match="key!" />
+		<combo key="level" text="Level" match="key!" />
+		<combo key="step_count" text="Step count" match="none" />
+		<combo key="wheelchair" text="Wheelchair" values="limited,no,yes" match="none" />
+		<combo key="automatic_door" text="Automatic door" values="button,continuous,floor,motion,no,slowdown_button,yes" match="none" />
+	</item>
+	<item icon="door_garage.svg" name="Door/Shop" type="node">
+		<combo key="entrance" text="Entrance" values="garage" match="keyvalue!" />
+		<combo key="door" text="Door" values="folding,hinged,loadingdock,no,overhead,revolving,sliding,trapdoor,yes" match="key!" />
+		<combo key="door:wings" text="Door:wings" match="key!" />
+		<combo key="level" text="Level" match="key!" />
+		<combo key="step_count" text="Step count" match="none" />
+		<combo key="wheelchair" text="Wheelchair" values="limited,no,yes" match="none" />
+		<combo key="automatic_door" text="Automatic door" values="button,continuous,floor,motion,no,slowdown_button,yes" match="none" />
+	</item>
+	<item icon="door_home.svg" name="Door/Home" type="node">
+		<combo key="entrance" text="Entrance" values="home" match="keyvalue!" />
+		<combo key="door" text="Door" values="folding,hinged,loadingdock,no,overhead,revolving,sliding,trapdoor,yes" match="key!" />
+		<combo key="door:wings" text="Door:wings" match="key!" />
+		<combo key="level" text="Level" match="key!" />
+		<combo key="step_count" text="Step count" match="none" />
+		<combo key="wheelchair" text="Wheelchair" values="limited,no,yes" match="none" />
+		<combo key="automatic_door" text="Automatic door" values="button,continuous,floor,motion,no,slowdown_button,yes" match="none" />
+	</item>
+	<item icon="door_main.svg" name="Door/Main" type="node">
+		<combo key="entrance" text="Entrance" values="main" match="keyvalue!" />
+		<combo key="door" text="Door" values="folding,hinged,loadingdock,no,overhead,revolving,sliding,trapdoor,yes" match="key!" />
+		<combo key="door:wings" text="Door:wings" match="key!" />
+		<combo key="level" text="Level" match="key!" />
+		<combo key="step_count" text="Step count" match="none" />
+		<combo key="wheelchair" text="Wheelchair" values="limited,no,yes" match="none" />
+		<combo key="automatic_door" text="Automatic door" values="button,continuous,floor,motion,no,slowdown_button,yes" match="none" />
+	</item>
+	<item icon="door_service.svg" name="Door/Service" type="node">
+		<combo key="entrance" text="Entrance" values="service" match="keyvalue!" />
+		<combo key="door" text="Door" values="folding,hinged,loadingdock,no,overhead,revolving,sliding,trapdoor,yes" match="key!" />
+		<combo key="door:wings" text="Door:wings" match="key!" />
+		<combo key="level" text="Level" match="key!" />
+		<combo key="step_count" text="Step count" match="none" />
+		<combo key="wheelchair" text="Wheelchair" values="limited,no,yes" match="none" />
+		<combo key="automatic_door" text="Automatic door" values="button,continuous,floor,motion,no,slowdown_button,yes" match="none" />
+	</item>
+	<item icon="door_shop.svg" name="Door/Shop" type="node">
+		<combo key="entrance" text="Entrance" values="shop" match="keyvalue!" />
+		<combo key="door" text="Door" values="folding,hinged,loadingdock,no,overhead,revolving,sliding,trapdoor,yes" match="key!" />
+		<combo key="door:wings" text="Door:wings" match="key!" />
+		<combo key="level" text="Level" match="key!" />
+		<combo key="step_count" text="Step count" match="none" />
+		<combo key="wheelchair" text="Wheelchair" values="limited,no,yes" match="none" />
+		<combo key="automatic_door" text="Automatic door" values="button,continuous,floor,motion,no,slowdown_button,yes" match="none" />
+	</item>
+</presets>

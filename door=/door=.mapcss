@@ -1,0 +1,53 @@
+meta {
+	title: "Doors";
+	version: "1.0.0";
+	description: "Display doors";
+	author: "nw520";
+	icon: "door@map.svg";
+}
+
+setting::fixmes {
+    type: boolean;
+    label: tr("Display Fixmes");
+    default: true;
+}
+
+node[door][entrance] {
+	icon-image: door@map.svg;
+	icon-width: 16px;
+}
+node[door][entrance=garage] {
+	icon-image: door_garage@map.svg;
+	icon-width: 16px;
+}
+node[door][entrance=home] {
+	icon-image: door_home@map.svg;
+	icon-width: 16px;
+}
+node[door][entrance=main] {
+	icon-image: door_main@map.svg;
+	icon-width: 16px;
+}
+node[door][entrance=service] {
+	icon-image: door_service@map.svg;
+	icon-width: 16px;
+}
+node[door][entrance=shop] {
+	icon-image: door_shop@map.svg;
+	icon-width: 16px;
+}
+node[setting("fixmes")][door=yes]::fixme_and_note_layer {
+	font-size: 14px;
+	text: eval("Door");
+	text-color: #FFBFBF;
+	text-offset-x: 5px;
+	text-offset-y: 5px;
+}
+node[setting("fixmes")][door=hinged][!door:wings]::fixme_and_note_layer {
+	font-size: 14px;
+	text: eval("Wings");
+	text-color: #FFBFBF;
+	text-offset-x: 5px;
+	text-offset-y: 5px;
+}
+
