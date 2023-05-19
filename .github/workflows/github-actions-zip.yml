@@ -23,5 +23,9 @@ jobs:
           path: ${{ github.workspace }}/door=/
       - uses: actions/upload-artifact@v1
         with:
+          name: footway=crossing
+          path: ${{ github.workspace }}/footway=crossing/
+      - uses: actions/upload-artifact@v1
+        with:
           name: man_made=street_cabinet
           path: ${{ github.workspace }}/man_made=street_cabinet/

@@ -1,0 +1,17 @@
+meta {
+	title: "footway=crossing";
+	version: "1.0.0";
+	description: "Detailed visualisation of crossings";
+	author: "nw520";
+}
+
+/*  ##  PT-General  ##  */
+way[footway=crossing] {
+	dashes: list(10, 10);
+	dashes-background-color: black;
+	width: 4;
+}
+way[footway=traffic_island] {
+	color: #444;
+	width: 2;
+}
