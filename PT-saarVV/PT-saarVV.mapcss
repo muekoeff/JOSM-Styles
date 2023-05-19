@@ -1,0 +1,177 @@
+meta {
+	title: "PT-saarVV";
+	version: "1.0.0";
+	description: "Validation for PT in saarVV";
+	author: "nw520";
+	icon: "saarVV.svg";
+}
+
+setting::ifopt {
+	type: boolean;
+	label: "ref:IFOPT";
+	default: true;
+}
+setting::network_wikidata {
+	type: boolean;
+	label: "network:wikidata";
+	default: true;
+}
+setting::stop_id {
+	type: boolean;
+	label: "stop_id";
+	default: true;
+}
+
+/*  ##  PT-General  ##  */
+/*  ###  bus_bay  ### */
+way|z19-[bus_bay=~/both|right/] {
+    right-casing-width: 40;
+    right-casing-color: #00FFA0;
+    right-casing-offset: 2;
+    right-casing-dashes: 1, 1;
+}
+way|z19-[bus_bay=~/both|left/] {
+    left-casing-width: 40;
+    left-casing-color: #00FFA0;
+    left-casing-offset: 2;
+    left-casing-dashes: 1, 1;
+}
+
+/*  ###  local_ref  ### */
+node|z18-[local_ref]::local_ref,
+way|z18-[local_ref]::local_ref {
+	font-size: 20px;
+	text: tag("local_ref");
+	text-anchor-horizontal: left;
+	text-anchor-vertical: top;
+	text-color: green;
+	text-halo-radius: 3;
+	z-index: -100;
+}
+
+/*  ##  Config  ##  */
+*::warnings {
+	_symbol-color: #ff0000;
+	_symbol-size: 15;
+	_symbol-opacity: .5;
+
+	font-size: 20px;
+	text: prop("_warning");
+	text-anchor-horizontal: right;
+	text-color: red;
+	text-halo-radius: 4;
+	z-index: -100;
+}
+*|z17-::warnings {
+	_symbol-size: 25;
+	_symbol-opacity: .7;
+}
+*:selected::warnings {
+	_symbol-color: #ff00ff;
+	_symbol-opacity: 1;
+}
+*|z17-*:selected::warnings {
+	_symbol-opacity: 1;
+}
+
+/*  ##  saarVV ##  */
+/*  ###  Warnings  ###  */
+/* Fixme */
+node[highway=bus_stop][fixme]::warnings,
+way[highway=bus_stop][fixme]::warnings
+node[public_transport=platform][fixme]::warnings,
+way[public_transport=platform][fixme]::warnings,
+node[public_transport=stop_position][fixme]::warnings,
+way[public_transport=stop_position][fixme]::warnings {
+	_warning: concat(is_prop_set("_warning") ? concat(prop("_warning"), ", ") : "", "Fixme");
+}
+
+/* network:wikidata (wrong) */
+node[highway=bus_stop][network=saarVV][network:wikidata][network:wikidata!=Q2209244]::warnings,
+way[highway=bus_stop][network=saarVV][network:wikidata][network:wikidata!=Q2209244]::warnings
+node[public_transport=platform][network=saarVV][network:wikidata][network:wikidata!=Q2209244]::warnings,
+way[public_transport=platform][network=saarVV][network:wikidata][network:wikidata!=Q2209244]::warnings,
+node[public_transport=stop_position][network=saarVV][network:wikidata][network:wikidata!=Q2209244]::warnings,
+way[public_transport=stop_position][network=saarVV][network:wikidata][network:wikidata!=Q2209244]::warnings {
+	_warning: concat(is_prop_set("_warning") ? concat(prop("_warning"), ", ") : "", "Wrong network:wikidata");
+}
+
+/* stop_id (discrepancy) */
+node[highway=bus_stop][network=saarVV][ref:IFOPT][stop_id]::warnings,
+way[highway=bus_stop][network=saarVV][ref:IFOPT][stop_id]::warnings {
+	_match_ifopt: regexp_match("^de:[0-9]+:([0-9]+):.+", tag("ref:IFOPT"));
+	_match_stop: regexp_match("^([0-9]+).*", tag("stop_id"));
+	_warning: get(prop("_match_ifopt"), 1) == get(prop("_match_stop"), 1) ? prop("_warning") : concat(is_prop_set("_warning") ? concat(prop("_warning"), ", ") : "", "ref:IFOPT ≠ stop_id");
+}
+
+/* stop_id (wrong) */
+node[highway=bus_stop][network=saarVV][stop_id=~/[^\d-]+/]::warnings,
+way[highway=bus_stop][network=saarVV][stop_id=~/[^\d-]+/]::warnings {
+	_warning: concat(is_prop_set("_warning") ? concat(prop("_warning"), ", ") : "", "Wrong stop_id");
+}
+
+/*  ###  Styling  ###  */
+/* Fixme */
+node[highway=bus_stop][network=saarVV][fixme]::warnings,
+way[highway=bus_stop][network=saarVV][fixme]::warnings
+node[public_transport=platform][network=saarVV][fixme]::warnings,
+way[public_transport=platform][network=saarVV][fixme]::warnings,
+node[public_transport=stop_position][network=saarVV][fixme]::warnings,
+way[public_transport=stop_position][network=saarVV][fixme]::warnings,
+
+/* highway=bus_stop */
+node[public_transport=platform][!school_bus][!highway=bus_stop]::warnings,
+way[public_transport=platform][!school_bus][!highway=bus_stop]::warnings,
+
+/* public_transport=platform */
+node[highway=bus_stop][!public_transport]::warnings,
+way[highway=bus_stop][!public_transport]::warnings,
+node[highway=bus_stop][!public_transport=platform]::warnings,
+way[highway=bus_stop][!public_transport=platform]::warnings,
+
+/* network */
+node[highway=bus_stop][!school_bus][!network]::warnings,
+way[highway=bus_stop][!school_bus][!network]::warnings,
+node[public_transport=platform][!railway][!school_bus][!network]::warnings,
+way[public_transport=platform][!railway][!school_bus][!network]::warnings,
+node[public_transport=stop_position][!railway][!school_bus][!network]::warnings,
+way[public_transport=stop_position][!railway][!school_bus][!network]::warnings,
+
+/* network:wikidata */
+node[setting("network_wikidata")][network=saarVV][highway=bus_stop][!school_bus][!network:wikidata]::warnings,
+way[setting("network_wikidata")][network=saarVV][highway=bus_stop][!school_bus][!network:wikidata]::warnings
+node[setting("network_wikidata")][network=saarVV][public_transport=platform][!railway][!school_bus][!network:wikidata]::warnings,
+way[setting("network_wikidata")][network=saarVV][public_transport=platform][!railway][!school_bus][!network:wikidata]::warnings,
+node[setting("network_wikidata")][network=saarVV][public_transport=stop_position][!railway][!school_bus][!network:wikidata]::warnings,
+way[setting("network_wikidata")][network=saarVV][public_transport=stop_position][!railway][!school_bus][!network:wikidata]::warnings,
+
+/* network:wikidata (wrong) */
+node[highway=bus_stop][network=saarVV][!school_bus][network:wikidata][network:wikidata!=Q2209244]::warnings,
+way[highway=bus_stop][network=saarVV][!school_bus][network:wikidata][network:wikidata!=Q2209244]::warnings
+node[public_transport=platform][network=saarVV][!school_bus][network:wikidata][network:wikidata!=Q2209244]::warnings,
+way[public_transport=platform][network=saarVV][!school_bus][network:wikidata][network:wikidata!=Q2209244]::warnings,
+node[public_transport=stop_position][network=saarVV][!school_bus][network:wikidata][network:wikidata!=Q2209244]::warnings,
+way[public_transport=stop_position][network=saarVV][!school_bus][network:wikidata][network:wikidata!=Q2209244]::warnings,
+
+/* ref:IFOPT */
+node[setting("ifopt")][network=saarVV][public_transport=platform][!school_bus][!ref:IFOPT]::warnings,
+way[setting("ifopt")][network=saarVV][public_transport=platform][!school_bus][!ref:IFOPT]::warnings,
+
+relation[railway=platform][!ref:IFOPT]::warnings > node,
+
+/* stop_id */
+node[setting("stop_id")][network=saarVV][highway=bus_stop][!school_bus][!stop_id]::warnings,
+way[setting("stop_id")][network=saarVV][highway=bus_stop][!school_bus][!stop_id]::warnings,
+node[setting("stop_id")][network=saarVV][public_transport=platform][!railway][!school_bus][!stop_id]::warnings,
+way[setting("stop_id")][network=saarVV][public_transport=platform][!railway][!school_bus][!stop_id]::warnings,
+node[setting("stop_id")][network=saarVV][public_transport=stop_position][!railway][!school_bus][!stop_id]::warnings,
+way[setting("stop_id")][network=saarVV][public_transport=stop_position][!railway][!school_bus][!stop_id]::warnings,
+
+/* stop_id (wrong) */
+node[highway=bus_stop][network=saarVV][stop_id][stop_id=~/[^\d-]+/]::warnings,
+way[highway=bus_stop][network=saarVV][stop_id][stop_id=~/[^\d-]+/]::warnings {
+	symbol-fill-color: prop("_symbol-color");
+	symbol-fill-opacity: prop("_symbol-opacity");
+	symbol-shape: circle;
+	symbol-size: prop("_symbol-size");
+}
