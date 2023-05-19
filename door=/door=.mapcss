@@ -7,13 +7,21 @@ meta {
 }
 
 setting::fixmes {
-    type: boolean;
-    label: tr("Display Fixmes");
-    default: true;
+	type: boolean;
+	label: tr("Display Fixmes");
+	default: true;
 }
 
 node[door][entrance] {
 	icon-image: door@map.svg;
+	icon-width: 16px;
+}
+node[door][entrance=emergency] {
+	icon-image: door_emergency@map.svg;
+	icon-width: 16px;
+}
+node[door][entrance=exit] {
+	icon-image: door_exit@map.svg;
 	icon-width: 16px;
 }
 node[door][entrance=garage] {
